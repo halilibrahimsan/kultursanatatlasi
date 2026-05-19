@@ -1,5 +1,17 @@
 import Link from "next/link";
 import { sinemaTarihi } from "@/data/sinema";
+import Timeline from "@/components/Timeline";
+import type { TimelineItem } from "@/components/Timeline";
+
+const sinemaTarihiTimeline: TimelineItem[] = [
+  { yil: "1895", baslik: "İlk Film", aciklama: "Lumière Kardeşler" },
+  { yil: "1927", baslik: "Sesli Sinema", aciklama: "The Jazz Singer" },
+  { yil: "1940", baslik: "Altın Çağ", aciklama: "Hollywood Studios" },
+  { yil: "1960", baslik: "Yeni Dalga", aciklama: "Godard, Truffaut" },
+  { yil: "1975", baslik: "Blockbuster", aciklama: "Jaws, Star Wars" },
+  { yil: "2000", baslik: "Dijital Çağ", aciklama: "CGI & bağımsız" },
+  { yil: "2020+", baslik: "Streaming", aciklama: "Netflix, global" },
+];
 
 export const metadata = {
   title: "Sinema Tarihi | Kültür & Sanat Atlası",
@@ -26,31 +38,7 @@ export default function SinemaTarihiSayfasi() {
         </p>
       </div>
 
-      {/* Zaman çizelgesi görsel */}
-      <div className="bg-gradient-to-r from-violet-900/30 via-gray-900 to-gray-900 border border-violet-800/30 rounded-2xl p-6 mb-12">
-        <div className="flex items-center justify-between text-sm overflow-x-auto gap-4">
-          {[
-            { yil: "1895", etiket: "İlk Film" },
-            { yil: "1927", etiket: "Sesli Sinema" },
-            { yil: "1940", etiket: "Altın Çağ" },
-            { yil: "1960", etiket: "Yeni Dalga" },
-            { yil: "1975", etiket: "Blockbuster" },
-            { yil: "2000", etiket: "Dijital" },
-            { yil: "2020+", etiket: "Streaming" },
-          ].map((nokta, i, arr) => (
-            <div key={i} className="flex items-center gap-2 flex-shrink-0">
-              <div className="text-center">
-                <div className="w-3 h-3 bg-violet-500 rounded-full mx-auto mb-1" />
-                <div className="text-violet-300 font-bold text-xs">{nokta.yil}</div>
-                <div className="text-gray-500 text-xs">{nokta.etiket}</div>
-              </div>
-              {i < arr.length - 1 && (
-                <div className="w-8 h-0.5 bg-gray-700 flex-shrink-0" />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+      <Timeline items={sinemaTarihiTimeline} accent="violet" />
 
       {/* Dönemler */}
       <div className="space-y-8">

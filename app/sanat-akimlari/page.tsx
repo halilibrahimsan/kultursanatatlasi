@@ -1,5 +1,19 @@
 import Link from "next/link";
 import { sanatAkimlari } from "@/data/sanatAkimlari";
+import Timeline from "@/components/Timeline";
+import type { TimelineItem } from "@/components/Timeline";
+
+const sanatTimeline: TimelineItem[] = [
+  { yil: "15. yy", baslik: "Yüksek Rönesans", aciklama: "Da Vinci, Raphael" },
+  { yil: "17. yy", baslik: "Barok", aciklama: "Rembrandt, Caravaggio" },
+  { yil: "18. yy", baslik: "Neoklasizm", aciklama: "David, Canova" },
+  { yil: "1860", baslik: "Empresyonizm", aciklama: "Monet, Renoir" },
+  { yil: "1900", baslik: "Ekspresyonizm", aciklama: "Munch, Kirchner" },
+  { yil: "1907", baslik: "Kübizm", aciklama: "Picasso, Braque" },
+  { yil: "1924", baslik: "Sürrealizm", aciklama: "Dalí, Ernst" },
+  { yil: "1950", baslik: "Pop Art", aciklama: "Warhol, Lichtenstein" },
+  { yil: "1960+", baslik: "Minimalizm", aciklama: "Judd, Andre" },
+];
 
 export const metadata = {
   title: "Sanat Akımları | Kültür & Sanat Atlası",
@@ -24,6 +38,8 @@ export default function SanatAkimlariSayfasi() {
           büyük dönüşüm noktalarını, temsilcilerini ve miraslarını keşfedin.
         </p>
       </div>
+
+      <Timeline items={sanatTimeline} accent="amber" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sanatAkimlari.map((akim) => (

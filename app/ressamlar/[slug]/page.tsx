@@ -1,6 +1,7 @@
 import { ressamlar } from "@/data/ressamlar";
 import { artworkImages } from "@/data/artworkImages";
 import ArtworkImage from "@/components/ArtworkImage";
+import AudioPlayer from "@/components/AudioPlayer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -70,6 +71,8 @@ export default async function RessamDetay({
           </div>
         </div>
       </div>
+
+      <AudioPlayer title={`${ressam.ad} — Biyografi`} duration="~5 dk" />
 
       {/* Eser Galerisi */}
       {images.length > 0 && (
