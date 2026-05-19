@@ -1,0 +1,26 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Kültür & Sanat Atlası",
+  description:
+    "Resim Sanatı, Ressamlar, Sanat Akımları, Edebiyat, Sinema Tarihi ve Popüler Kültür hakkında kapsamlı Türkçe bilgi kaynağı.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="tr" className="h-full">
+      <body className="min-h-full flex flex-col bg-gray-950 text-gray-100 antialiased">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
