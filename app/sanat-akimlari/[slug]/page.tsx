@@ -1,4 +1,6 @@
 import { sanatAkimlari } from "@/data/sanatAkimlari";
+import { movementImages } from "@/data/artworkImages";
+import ArtworkImage from "@/components/ArtworkImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -30,6 +32,7 @@ export default async function SanatAkimiDetay({
   if (!akim) notFound();
 
   const diger = sanatAkimlari.filter((a) => a.slug !== slug).slice(0, 3);
+  const movImg = movementImages[slug];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -64,6 +67,13 @@ export default async function SanatAkimiDetay({
           </div>
         </div>
       </div>
+
+      {/* Temsilci Eser */}
+      {movImg && (
+        <div className="mb-6">
+          <ArtworkImage {...movImg} />
+        </div>
+      )}
 
       {/* Açıklama */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-6">

@@ -1,4 +1,6 @@
 import { turkRessamlar } from "@/data/turkSanati";
+import { artworkImages } from "@/data/artworkImages";
+import ArtworkImage from "@/components/ArtworkImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -18,6 +20,7 @@ export default async function TurkRessamDetay({ params }: { params: Promise<{ sl
   const ressam = turkRessamlar.find((r) => r.slug === slug);
   if (!ressam) notFound();
   const diger = turkRessamlar.filter((r) => r.slug !== slug).slice(0, 3);
+  const images = artworkImages[slug] ?? [];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -45,6 +48,17 @@ export default async function TurkRessamDetay({ params }: { params: Promise<{ sl
           </div>
         </div>
       </div>
+
+      {images.length > 0 && (
+        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-6">
+          <h2 className="text-2xl font-bold text-white mb-6">🖼️ Eserlerden</h2>
+          <div className={`grid gap-4 ${images.length === 1 ? "grid-cols-1 max-w-md mx-auto" : images.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}`}>
+            {images.map((img) => (
+              <ArtworkImage key={img.src} {...img} />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-6">
         <h2 className="text-2xl font-bold text-white mb-6">📖 Biyografi</h2>

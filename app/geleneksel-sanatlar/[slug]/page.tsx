@@ -1,4 +1,6 @@
 import { gelenekselSanatlar } from "@/data/gelenekselSanatlar";
+import { gelenekselImages } from "@/data/artworkImages";
+import ArtworkImage from "@/components/ArtworkImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -18,6 +20,7 @@ export default async function GelenekselSanatDetay({ params }: { params: Promise
   const sanat = gelenekselSanatlar.find((s) => s.slug === slug);
   if (!sanat) notFound();
   const diger = gelenekselSanatlar.filter((s) => s.slug !== slug).slice(0, 3);
+  const sanImg = gelenekselImages[slug];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -49,6 +52,13 @@ export default async function GelenekselSanatDetay({ params }: { params: Promise
           </div>
         </div>
       </div>
+
+      {/* Temsilci Görsel */}
+      {sanImg && (
+        <div className="mb-6">
+          <ArtworkImage {...sanImg} />
+        </div>
+      )}
 
       {/* Açıklama */}
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mb-6">
