@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  /* Warm-tinted dark palette — Swiss editorial feel */
+  --color-gray-950: #0D0B09;
+  --color-gray-900: #181511;
+  --color-gray-800: #262119;
+  --color-gray-700: #3B3529;
+  --color-gray-600: #5C5448;
+  --color-gray-500: #8A8178;
+  --color-gray-400: #B5ADA4;
+  --color-gray-300: #D5CEC7;
+  --color-gray-200: #EDE7E0;
+  --color-gray-100: #F5F0EA;
+
+  /* Refined gold/amber accents */
+  --color-amber-950: #1A1205;
+  --color-amber-900: #2E1F07;
+  --color-amber-800: #4A3410;
+  --color-amber-700: #6B4C18;
+  --color-amber-600: #9A6E25;
+  --color-amber-500: #C09040;
+  --color-amber-400: #D4AB65;
+  --color-amber-300: #E8CB99;
+
+  /* Typography scale */
+  --font-sans: "Inter var", "Inter", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --leading-tight: 1.15;
+  --tracking-tight: -0.02em;
+}
+
+:root {
+  --background: #0D0B09;
+  --foreground: #F0EAE2;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Swiss Modernism typography — headings */
+h1, h2, h3, h4 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #181511; }
+::-webkit-scrollbar-thumb { background: #3B3529; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #5C5448; }
+
+::selection { background-color: #C09040; color: #0D0B09; }

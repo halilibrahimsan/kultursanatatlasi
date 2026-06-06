@@ -1,0 +1,12 @@
+{
+  "name": "kultursanat-tweet-bot",
+  "version": "1.0.0",
+  "description": "Otomatik tweet botu - Kültür & Sanat Atlası",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "twitter-api-v2": "^1.17.2"
+  }
+}
