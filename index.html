@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İstanbul Edebiyat Haritası</title>
+  <meta name="description" content="İstanbul'un edebi mekânlarını, yazarlarını ve rotalarını keşfedin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="panel" id="panel">
+      <header class="brand">
+        <h1>İstanbul<br><span>Edebiyat Haritası</span></h1>
+        <p>Romanların, şiirlerin ve yazarların izinde bir şehir okuması.</p>
+      </header>
+
+      <nav class="tabs" role="tablist">
+        <button role="tab" class="tab active" data-tab="kesfet" aria-selected="true">Keşfet</button>
+        <button role="tab" class="tab" data-tab="rotalar" aria-selected="false">Rotalar</button>
+        <button role="tab" class="tab" data-tab="favoriler" aria-selected="false">Favoriler <span id="fav-count" class="badge">0</span></button>
+      </nav>
+
+      <section class="tab-body" id="tab-kesfet">
+        <input id="search" class="search" type="search" placeholder="Yazar, eser, semt ara…" autocomplete="off">
+        <div class="chips" id="cat-chips" aria-label="Kategori"></div>
+        <select id="era" class="select" aria-label="Dönem">
+          <option value="">Tüm dönemler</option>
+        </select>
+        <p class="count" id="result-count"></p>
+        <ul class="list" id="list"></ul>
+      </section>
+
+      <section class="tab-body hidden" id="tab-rotalar">
+        <p class="hint">Bir rota seçin; haritada duraklar sırayla birleştirilir.</p>
+        <ul class="routes" id="routes"></ul>
+      </section>
+
+      <section class="tab-body hidden" id="tab-favoriler">
+        <p class="hint" id="fav-empty">Henüz favori yok. Bir mekânın detayında ☆ simgesine dokunun.</p>
+        <ul class="list" id="fav-list"></ul>
+      </section>
+
+      <footer class="foot">
+        <button id="theme-toggle" class="ghost" type="button">Tema</button>
+        <span>Harita © OpenStreetMap, CARTO</span>
+      </footer>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map" aria-label="İstanbul haritası"></div>
+      <article class="detail hidden" id="detail" aria-live="polite"></article>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
