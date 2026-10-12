@@ -82,9 +82,9 @@ window.MEKANLAR = [
     id: "istanbulu-dinliyorum",
     ad: "Eminönü – Haliç kıyısı",
     kategori: "siir", donem: "cumhuriyet",
-    yazar: "Orhan Veli Kanık", eser: "İstanbul'u Dinliyorum (1947)",
+    yazar: "Orhan Veli Kanık", eser: "İstanbul'u Dinliyorum — Vazgeçemediğim (1945)",
     semt: "Eminönü, Fatih", konum: [41.0170, 28.9725], temsili: true,
-    aciklama: "Garip akımının öncüsünün belki de en sevilen şiiri: kuş sesleri, Kapalıçarşı'nın serinliği, Mahmutpaşa'nın güvercinleri, Haliç'ten gelen sesler… Şehir, gözler kapalıyken bir ses manzarası olarak kurulur.",
+    aciklama: "Garip akımının öncüsünün belki de en sevilen şiiri: kuş sesleri, Kapalıçarşı'nın serinliği, güvercin dolu avlular, kıyıdan gelen sesler… Şehir, gözler kapalıyken bir ses manzarası olarak kurulur.",
     alinti: "İstanbul'u dinliyorum, gözlerim kapalı"
   },
   {
@@ -181,7 +181,7 @@ window.MEKANLAR = [
     ad: "Boğaziçi yalıları",
     kategori: "kurmaca", donem: "tanzimat",
     yazar: "Halit Ziya Uşaklıgil", eser: "Aşk-ı Memnu (1900)",
-    semt: "Bebek, Beşiktaş", konum: [41.0770, 29.0440], temsili: true,
+    semt: "Boğaziçi", konum: [41.0770, 29.0440], temsili: true,
     aciklama: "Adnan Bey'in Boğaziçi'ndeki yalısı, Bihter'in yasak aşkının kapalı sahnesidir. Servet-i Fünun romanının ustalık eseri, Batılı roman tekniğinin Türkçedeki ilk olgun örneklerinden sayılır.",
     uyarlama: "TRT dizisi (1975), Kanal D dizisi (2008–2010)"
   },
