@@ -57,9 +57,9 @@
   }
   setTiles();
   if (window.matchMedia) {
-    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
-      if (!root.getAttribute("data-theme")) setTiles();
-    });
+    var mq = matchMedia("(prefers-color-scheme: dark)");
+    var onScheme = function () { if (!root.getAttribute("data-theme")) setTiles(); };
+    if (mq.addEventListener) mq.addEventListener("change", onScheme); else if (mq.addListener) mq.addListener(onScheme);
   }
   $("theme-toggle").addEventListener("click", function () {
     var next = isDark() ? "light" : "dark";
@@ -147,8 +147,11 @@
     var ids = new Set(visible.map(function (m) { return m.id; }));
     M.forEach(function (m) {
       var mk = markers[m.id];
-      var show = ids.has(m.id) || inRoute(m.id);
-      if (show && !map.hasLayer(mk)) mk.addTo(map);
+      var show = ids.has(m.id) || inRoute(m.id) || m.id === state.activeId;
+      if (show && !map.hasLayer(mk)) {
+        mk.addTo(map);
+        if (m.id === state.activeId) setPinActive(m.id, true);
+      }
       if (!show && map.hasLayer(mk)) map.removeLayer(mk);
     });
     $("result-count").textContent = visible.length + " mekân";
@@ -180,7 +183,9 @@
     if (fly) map.flyTo(m.konum, Math.max(map.getZoom(), 15), { duration: .8 });
     showDetail(m);
     document.querySelectorAll(".item").forEach(function (li) {
-      li.classList.toggle("active", li.dataset.id === id);
+      var on = li.dataset.id === id;
+      li.classList.toggle("active", on);
+      if (on && !fly && li.offsetParent) li.scrollIntoView({ block: "nearest", behavior: "smooth" });
     });
     if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
   }
@@ -224,6 +229,7 @@
     };
   }
   function closeDetail() {
+    if ($("detail").classList.contains("hidden")) return;
     $("detail").classList.add("hidden");
     if (state.activeId) setPinActive(state.activeId, false);
     state.activeId = null;
@@ -257,12 +263,11 @@
     routeLayer.clearLayers();
     var r = R.filter(function (x) { return x.id === id; })[0];
     var pts = r.duraklar.map(function (d) { return byId[d].konum; });
-    var color = getComputedStyle(root).getPropertyValue("--accent").trim() || "#b5452b";
-    L.polyline(pts, { color: color, weight: 4, opacity: .8, dashArray: "8 8" }).addTo(routeLayer);
+    L.polyline(pts, { className: "route-line", weight: 4, opacity: .8, dashArray: "8 8" }).addTo(routeLayer);
     pts.forEach(function (p, i) {
       L.marker(p, {
-        icon: L.divIcon({ className: "", html: '<div class="route-num">' + (i + 1) + "</div>", iconSize: [22, 22], iconAnchor: [11, 26] }),
-        interactive: false
+        icon: L.divIcon({ className: "", html: '<div class="route-num">' + (i + 1) + "</div>", iconSize: [22, 22], iconAnchor: [11, 34] }),
+        interactive: false, zIndexOffset: 1000
       }).addTo(routeLayer);
     });
     routesEl.querySelectorAll(".route").forEach(function (el) { el.classList.toggle("active", el.dataset.id === id); });

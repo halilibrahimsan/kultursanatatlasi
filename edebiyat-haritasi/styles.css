@@ -11,12 +11,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #15140f; --panel: #1d1b16; --ink: #ede6d6; --muted: #a69e8d;
-    --line: #34302740; --accent: #e07a5f; --card: #25231d; --shadow: 0 8px 30px rgba(0,0,0,.5);
+    --line: #3a352b; --accent: #e07a5f; --card: #25231d; --shadow: 0 8px 30px rgba(0,0,0,.5);
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #15140f; --panel: #1d1b16; --ink: #ede6d6; --muted: #a69e8d;
   --line: #3a352b; --accent: #e07a5f; --card: #25231d; --shadow: 0 8px 30px rgba(0,0,0,.5);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -29,6 +31,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .app { display: grid; grid-template-columns: 380px 1fr; height: 100vh; height: 100dvh; }
 .panel {
+  min-width: 0;
   background: var(--panel); border-right: 1px solid var(--line);
   display: flex; flex-direction: column; min-height: 0;
 }
@@ -131,16 +134,21 @@ button { font: inherit; color: inherit; cursor: pointer; }
   display: grid; place-items: center; font: 600 12px Inter, sans-serif; border: 2px solid #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,.4);
 }
+.route-line { stroke: var(--accent); }
 .leaflet-tooltip { font: 500 12.5px Inter, sans-serif; }
 
 @media (max-width: 760px) {
-  .app { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; grid-template-rows: 45dvh 1fr; }
+  .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: 45vh 1fr; grid-template-rows: 45dvh 1fr; }
   .map-wrap { grid-row: 1; }
   .panel { grid-row: 2; border-right: 0; border-top: 1px solid var(--line); }
   .brand { padding: 12px 16px 4px; }
   .brand h1 { font-size: 20px; }
   .brand h1 br { display: none; }
   .brand p { display: none; }
+  .tab-body { padding-top: 10px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; }
   .detail {
     position: fixed; top: auto; bottom: 0; left: 0; right: 0; width: 100%;
     max-height: 60vh; border-radius: 18px 18px 0 0;
