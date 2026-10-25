@@ -1,0 +1,13 @@
+{
+  "name": "linqi",
+  "version": "1.0.0",
+  "description": "Linqi — links, simplified. Bağımlılıksız URL kısaltıcı.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

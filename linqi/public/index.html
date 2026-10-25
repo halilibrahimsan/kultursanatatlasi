@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linqi — Links, simplified.</title>
+  <meta name="description" content="Linqi ile uzun bağlantıları saniyeler içinde kısaltın.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111827'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='18' fill='%2360a5fa' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <header class="brand">
+        <h1>LINQI</h1>
+        <p class="tagline">LINKS, SIMPLIFIED.</p>
+        <p class="sub">Your links. Shorter. Smarter.</p>
+      </header>
+
+      <hr>
+
+      <form id="shorten-form" novalidate>
+        <label for="url" class="label">Uzun bağlantı</label>
+        <input id="url" name="url" type="url" inputmode="url" autocomplete="off" placeholder="https://ornek.com/cok/uzun/bir/baglanti" required>
+
+        <details class="advanced">
+          <summary>Özel ad (isteğe bağlı)</summary>
+          <div class="alias-row">
+            <span class="prefix" id="prefix"></span>
+            <input id="alias" name="alias" type="text" placeholder="kultur-gecesi" maxlength="32" autocomplete="off">
+          </div>
+        </details>
+
+        <button type="submit" class="btn primary" id="submit">Kısalt</button>
+        <p class="error" id="error" role="alert" hidden></p>
+      </form>
+
+      <div class="result" id="result" hidden>
+        <div class="result-row">
+          <a id="short-url" href="#" target="_blank" rel="noopener"></a>
+          <button class="btn" id="copy" type="button">Kopyala</button>
+        </div>
+        <p class="muted truncate" id="long-url"></p>
+        <div id="qr" class="qr" aria-label="QR kod"></div>
+      </div>
+    </section>
+
+    <section class="card light" id="recent-card" hidden>
+      <h2>Son bağlantılar</h2>
+      <ul id="recent" class="recent"></ul>
+    </section>
+
+    <footer class="foot">Linqi · links, simplified.</footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>
