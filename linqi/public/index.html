@@ -19,7 +19,14 @@
 
       <hr>
 
-      <form id="shorten-form" novalidate>
+      <form id="login-form" hidden>
+        <label for="password" class="label">Yönetici şifresi</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="submit" class="btn primary" id="login-submit">Giriş yap</button>
+        <p class="error" id="login-error" role="alert" hidden></p>
+      </form>
+
+      <form id="shorten-form" novalidate hidden>
         <label for="url" class="label">Uzun bağlantı</label>
         <input id="url" name="url" type="url" inputmode="url" autocomplete="off" placeholder="https://ornek.com/cok/uzun/bir/baglanti" required>
 
@@ -50,7 +57,7 @@
       <ul id="recent" class="recent"></ul>
     </section>
 
-    <footer class="foot">Linqi · links, simplified.</footer>
+    <footer class="foot">Linqi · links, simplified. <button type="button" class="link-btn" id="logout" hidden>Çıkış yap</button></footer>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>

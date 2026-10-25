@@ -13,6 +13,57 @@
 
   $('prefix').textContent = `${location.host}/`;
 
+  const loginForm = $('login-form');
+  const loginError = $('login-error');
+  const logoutBtn = $('logout');
+
+  function showLogin(message = '') {
+    loginForm.hidden = false;
+    form.hidden = true;
+    result.hidden = true;
+    $('recent-card').hidden = true;
+    logoutBtn.hidden = true;
+    loginError.textContent = message;
+    loginError.hidden = !message;
+    $('password').focus();
+  }
+
+  function showApp(authRequired) {
+    loginForm.hidden = true;
+    form.hidden = false;
+    logoutBtn.hidden = !authRequired;
+    loadRecent();
+  }
+
+  async function api(path, options = {}) {
+    const res = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json', ...options.headers } });
+    if (res.status === 401 && path !== '/api/session') {
+      showLogin('Oturumunuz sona erdi, lütfen tekrar giriş yapın.');
+      throw new Error('Giriş yapmanız gerekiyor.');
+    }
+    return res;
+  }
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = $('login-submit');
+    button.disabled = true;
+    try {
+      const res = await api('/api/session', { method: 'POST', body: JSON.stringify({ password: $('password').value }) });
+      const data = await res.json();
+      if (!res.ok) return showLogin(data.error || 'Giriş yapılamadı.');
+      $('password').value = '';
+      showApp(true);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    await api('/api/session', { method: 'DELETE' });
+    showLogin();
+  });
+
   function showError(message) {
     errorEl.textContent = message;
     errorEl.hidden = !message;
@@ -48,9 +99,8 @@
     submit.disabled = true;
     submit.textContent = 'Kısaltılıyor…';
     try {
-      const res = await fetch('/api/links', {
+      const res = await api('/api/links', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: urlInput.value, alias: aliasInput.value }),
       });
       const data = await res.json();
@@ -74,8 +124,8 @@
   copyBtn.addEventListener('click', () => copy(shortUrl.textContent, copyBtn));
 
   async function loadRecent() {
-    const res = await fetch('/api/links');
-    if (!res.ok) return;
+    const res = await api('/api/links').catch(() => null);
+    if (!res || !res.ok) return;
     const { links } = await res.json();
     const list = $('recent');
     list.replaceChildren(...links.map(renderItem));
@@ -95,7 +145,7 @@
     const del = Object.assign(document.createElement('button'), { className: 'btn', type: 'button', textContent: 'Sil', title: 'Bağlantıyı sil' });
     del.addEventListener('click', async () => {
       if (!confirm(`${link.code} silinsin mi?`)) return;
-      await fetch(`/api/links/${encodeURIComponent(link.code)}`, { method: 'DELETE' });
+      await api(`/api/links/${encodeURIComponent(link.code)}`, { method: 'DELETE' });
       loadRecent();
     });
     meta.append(clicks, copyItem, del);
@@ -104,5 +154,8 @@
     return li;
   }
 
-  loadRecent();
+  fetch('/api/session')
+    .then((res) => res.json())
+    .then(({ authRequired, authed }) => (authed ? showApp(authRequired) : showLogin()))
+    .catch(() => showLogin('Sunucuya ulaşılamadı.'));
 })();

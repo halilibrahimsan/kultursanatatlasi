@@ -1,0 +1,23 @@
+# Render Blueprint — Linqi URL kısaltıcı
+# Render panelinde: New → Blueprint → bu depoyu seçin.
+services:
+  - type: web
+    name: linqi
+    runtime: node
+    plan: free
+    rootDir: linqi
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Yönetici şifresi — kurulumda Render sizden isteyecek.
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Kalıcı Postgres bağlantısı (Neon, Supabase vb.) — kurulumda Render sizden isteyecek.
+      - key: DATABASE_URL
+        sync: false
+      # Oturum çerezlerini imzalamak için rastgele üretilir.
+      - key: SESSION_SECRET
+        generateValue: true
